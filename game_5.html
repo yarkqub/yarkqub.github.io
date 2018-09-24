@@ -21,9 +21,9 @@
 		<button id="main">Start</button>
 		<div id="hider" style="display:none">
 		<table id="main_table">
-			<tr><td><button class="btn" id="btn1" onclick="compare()"></button></td><td><button class="btn" id="btn2"></button></td><td><button class="btn" id="btn3"></button></td></tr>
-			<tr><td><button class="btn" id="btn4"></button></td><td><button class="btn" id="btn5"></button></td><td><button class="btn" id="btn6"></button></td></tr>
-			<tr><td><button class="btn" id="btn7"></button></td><td><button class="btn" id="btn8"></button></td><td><button class="btn" id="btn9"></button></td></tr>
+			<tr><td><button class="btn" id="btn1" onclick="compare(this.id);"></button></td><td><button class="btn" id="btn2" onclick="compare(this.id);"></button></td><td><button class="btn" id="btn3" onclick="compare(this.id);"></button></td></tr>
+			<tr><td><button class="btn" id="btn4" onclick="compare(this.id);"></button></td><td><button class="btn" id="btn5" onclick="compare(this.id);"></button></td><td><button class="btn" id="btn6" onclick="compare(this.id);"></button></td></tr>
+			<tr><td><button class="btn" id="btn7" onclick="compare(this.id);"></button></td><td><button class="btn" id="btn8" onclick="compare(this.id);"></button></td><td><button class="btn" id="btn9" onclick="compare(this.id);"></button></td></tr>
 		<table>
 		</div>
 		<script>
@@ -31,6 +31,8 @@
 			console.log(color);
 			var game_start = false;
 			var countdown = 5;
+			var life = 3;
+			var score = 0;
 			var colorArray = [];
 			
 			function getrandom(min, max){
@@ -56,6 +58,23 @@
 				}, 1000);
 				}	
 			};
+			
+			function compare(ids){
+				if(document.getElementById(ids).style.backgroundColor === document.getElementById("main").style.backgroundColor){
+					score++;
+					document.getElementById("score").innerHTML = score;
+					countdown = 5;
+				}
+				else{
+					life--;
+					document.getElementById("life").innerHTML = life;
+					if(life == 0){
+						document.getElementById("hider").style.display = "none";
+					}
+				}
+				setColour();
+				setStartBtn();
+			}
 			
 			var contains = function(needle) {
 			// Per spec, the way to identify NaN is that it is not equal to itself
