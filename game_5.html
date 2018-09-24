@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	</head>
+	<body>
+		<style>
+			#main{
+				width: 100%;
+				height: 32px;
+			}
+			#main_table{
+				width: 100%;
+			}
+			.btn{
+				width: 100%;
+				height: 32px;
+				background-color:white;
+			}
+		</style>
+		Life: <span id="life">3</span> | Score: <span id="score">0</span>
+		<button id="main">Start</button>
+		<div id="hider" style="display:none">
+		<table id="main_table">
+			<tr><td><button class="btn" id="btn1" onclick="compare()"></button></td><td><button class="btn" id="btn2"></button></td><td><button class="btn" id="btn3"></button></td></tr>
+			<tr><td><button class="btn" id="btn4"></button></td><td><button class="btn" id="btn5"></button></td><td><button class="btn" id="btn6"></button></td></tr>
+			<tr><td><button class="btn" id="btn7"></button></td><td><button class="btn" id="btn8"></button></td><td><button class="btn" id="btn9"></button></td></tr>
+		<table>
+		</div>
+		<script>
+			var color  = getrandom(1, 9);
+			console.log(color);
+			var game_start = false;
+			var countdown = 5;
+			var colorArray = [];
+			
+			function getrandom(min, max){
+				var rands = Math.floor(Math.random() * (max - min + 1)) + min;
+				return rands;
+			}
+			
+			document.getElementById("main").onclick = function(){
+				if(game_start == false){
+					game_start = true;
+					setColour();
+					setStartBtn();
+					document.getElementById("hider").style.display = "block";
+					setInterval(function(){
+						if(countdown > 0)
+						{
+							countdown --;
+							document.getElementById("main").innerHTML = countdown;
+						}
+						else{
+							clearInterval();
+						}
+				}, 1000);
+				}	
+			};
+			
+			var contains = function(needle) {
+			// Per spec, the way to identify NaN is that it is not equal to itself
+				var findNaN = needle !== needle;
+				var indexOf;
+
+				if(!findNaN && typeof Array.prototype.indexOf === 'function') {
+					indexOf = Array.prototype.indexOf;
+				} 
+				else {
+					indexOf = function(needle) {
+						var i = -1, index = -1;
+
+						for(i = 0; i < this.length; i++) {
+							var item = this[i];
+
+							if((findNaN && item !== item) || item === needle) {
+								index = i;
+								break;
+							}
+						}
+
+						return index;
+					};
+				}
+
+				return indexOf.call(this, needle) > -1;
+			};
+			
+			function setStartBtn(){
+				var getcolor = getrandom(1,9);
+				var current_button = "main";
+				if(getcolor == 1){
+								document.getElementById(current_button).style.backgroundColor = "rgb(255,0,0)";
+							}
+							else if(getcolor == 2){
+								document.getElementById(current_button).style.backgroundColor = "rgb(255,165,0)";
+							}
+							else if(getcolor == 3){
+								document.getElementById(current_button).style.backgroundColor = "rgb(255,255,0)";
+							}
+							else if(getcolor == 4){
+								document.getElementById(current_button).style.backgroundColor = "rgb(0,128,0)";
+							}
+							else if(getcolor == 5){
+								document.getElementById(current_button).style.backgroundColor = "rgb(0,0,255)";
+							}
+							else if(getcolor == 6){
+								document.getElementById(current_button).style.backgroundColor = "rgb(75,0,130)";
+							}
+							else if(getcolor == 7){
+								document.getElementById(current_button).style.backgroundColor = "rgb(128,0,128)";
+							}
+							else if(getcolor == 8){
+								document.getElementById(current_button).style.backgroundColor = "rgb(0,0,0)";
+							}
+							else if(getcolor == 9){
+								document.getElementById(current_button).style.backgroundColor = "rgb(255,255,255)";
+							}
+			}
+
+			function setColour(){
+				colorArray = [];
+				var current_button;
+				var getcolor;
+				var getit = false;
+				for(var x = 0; x < 9; x++){
+					current_button = "btn" + (x+1);
+					console.log(current_button);
+					getit = false;
+					while(getit == false)
+					{
+						getcolor = getrandom(1,9);
+						if(!contains.call(colorArray, getcolor)){
+							colorArray.push(getcolor);
+							console.log("> " + getcolor);
+							getit = true;
+							if(getcolor == 1){
+								document.getElementById(current_button).style.backgroundColor = "rgb(255,0,0)";
+							}
+							else if(getcolor == 2){
+								document.getElementById(current_button).style.backgroundColor = "rgb(255,165,0)";
+							}
+							else if(getcolor == 3){
+								document.getElementById(current_button).style.backgroundColor = "rgb(255,255,0)";
+							}
+							else if(getcolor == 4){
+								document.getElementById(current_button).style.backgroundColor = "rgb(0,128,0)";
+							}
+							else if(getcolor == 5){
+								document.getElementById(current_button).style.backgroundColor = "rgb(0,0,255)";
+							}
+							else if(getcolor == 6){
+								document.getElementById(current_button).style.backgroundColor = "rgb(75,0,130)";
+							}
+							else if(getcolor == 7){
+								document.getElementById(current_button).style.backgroundColor = "rgb(128,0,128)";
+							}
+							else if(getcolor == 8){
+								document.getElementById(current_button).style.backgroundColor = "rgb(0,0,0)";
+							}
+							else if(getcolor == 9){
+								document.getElementById(current_button).style.backgroundColor = "rgb(255,255,255)";
+							}
+						}
+						else{
+							getit = false;
+						}
+					}
+				}
+			}
+		</script>
+	</body>
+</html>
